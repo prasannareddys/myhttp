@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"sync"
 
 	"github.com/prasanna-eyewa/myhttp/external"
@@ -32,10 +33,10 @@ func main() {
 			apiClient := api.NewApiClient(reqUrl, external.GetClient())
 			callURLResponse, err := apiClient.CallURL()
 			if err != nil {
-				fmt.Println(fmt.Errorf("call failed for url %s with error %s", reqUrl, err.Error()))
+				log.Printf("Call failed for url \"%s\". Error %s.", reqUrl, err.Error())
+			} else {
+				fmt.Println(fmt.Sprintf("%s %x", callURLResponse.RequestURL, utils.GetHash(callURLResponse.ResponseBody)))
 			}
-
-			fmt.Println(fmt.Sprintf("%s %x", callURLResponse.RequestURL, utils.GetHash(callURLResponse.ResponseBody)))
 		}(reqUrl)
 	}
 	wg.Wait()

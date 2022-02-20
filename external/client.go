@@ -1,7 +1,6 @@
 package external
 
 import (
-	"fmt"
 	"net/http"
 	"net/url"
 	"sync"
@@ -41,16 +40,16 @@ func (c *Client) Get(url string) (*http.Response, error) {
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	req.Header.Set("Content-Type", DefaultContentType)
 	if err != nil {
-		return nil, fmt.Errorf("Filed to request url %s with error %s ", url, err.Error())
+		return nil, err
 	}
 
 	res, err := c.Do(req)
 	if err != nil {
-		return nil, fmt.Errorf("Filed to request url %s with error %s ", url, err.Error())
+		return nil, err
 	}
 
 	if res.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("Filed to request url %s with status %d ", url, res.StatusCode)
+		return nil, err
 	}
 
 	return res, nil

@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"io"
 
 	"github.com/prasanna-eyewa/myhttp/external"
@@ -30,12 +29,12 @@ func NewApiClient(reqUrl string, client external.HttpClient) *Client {
 func (ac Client) CallURL() (*CallURLResponseBody, error) {
 	res, err := ac.externalClient.Get(ac.reqUrl)
 	if err != nil {
-		return nil, fmt.Errorf("failed to request url %s with error %s ", ac.reqUrl, err.Error())
+		return nil, err
 	}
 	defer res.Body.Close()
 	resBody, err := io.ReadAll(res.Body)
 	if err != nil {
-		return nil, fmt.Errorf("failed to read response of url %s with error %s", ac.reqUrl, err.Error())
+		return nil, err
 	}
 
 	return &CallURLResponseBody{ResponseBody: string(resBody), RequestURL: res.Request.Referer()}, nil
