@@ -7,9 +7,12 @@ This service makes http request to the url , hash response and prints hash value
 
 ## Running and building project
 
+Before you begin you must have Go installed and configured properly for your computer. Please see
+https://golang.org/doc/install
+
 I have created a Make file to facilitate building and running the project
 
-# Please use following command to get available options
+## Please use following command to get available options
 
 ```shell
 make help
@@ -36,8 +39,3 @@ OR
 ```shell
 ./myhttp google.com
 ```
-
-## Tested Scenarios
-- ./myhttp google.com
-- ./myhttp -parallel 3 invalid google.com http://google.com baroquemusiclibrary.com test http://www.google.com
-- ./myhttp google.com http://google.com https://google.com http://wwww.google.com https://wwww.google.com

@@ -1,6 +1,7 @@
 package external
 
 import (
+	"fmt"
 	"net/http"
 	"net/url"
 	"sync"
@@ -49,7 +50,7 @@ func (c *Client) Get(url string) (*http.Response, error) {
 	}
 
 	if res.StatusCode != http.StatusOK {
-		return nil, err
+		return nil, fmt.Errorf("status %d is not okay.", res.StatusCode)
 	}
 
 	return res, nil
